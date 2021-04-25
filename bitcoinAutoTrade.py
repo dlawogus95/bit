@@ -42,6 +42,7 @@ while True:
         now = datetime.datetime.now()
         start_time = get_start_time("KRW-DOGE") # 9:00
         end_time = start_time + datetime.timedelta(days=1) # 9:00 + 1일
+        time.sleep(1)
 
         # 9:00 < 현재 < 8:59:00
         if start_time < now < end_time - datetime.timedelta(seconds=10):
@@ -55,7 +56,6 @@ while True:
             btc = get_balance("DOGE")
             if btc > 0.00008:
                 upbit.sell_market_order("KRW-DOGE", btc*0.9995)
-            time.sleep(1)
     except Exception as e:
         print(e)
         time.sleep(1)
