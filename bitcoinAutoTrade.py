@@ -6,7 +6,7 @@ import requests
 
 access = "WbrMIyrlPzhne4BGMuekE5B1OZ3bQNNxdE3iZ9Et"
 secret = "LrjXJSPM1cEBIm3VT5DPDlMxZxJuaE6pM5eTj1zy"
-myToken = "xoxb-1991965586182-1998743575218-P4D6Hxt1jSKQUJO0oUsw0Ma0"
+myToken = "xoxb-1991965586182-1998743575218-529KQmrJnxqSezy6djxChlLx"
 
 def post_message(token, channel, text):
     """슬랙 메시지 전송"""
@@ -56,23 +56,23 @@ post_message(myToken,"#crypto", "autotrade start")
 while True:
     try:
         now = datetime.datetime.now()
-        start_time = get_start_time("KRW-DOGE")
+        start_time = get_start_time("KRW-QTUM")
         end_time = start_time + datetime.timedelta(days=1)
 
         if start_time < now < end_time - datetime.timedelta(seconds=10):
-            target_price = get_target_price("KRW-DOGE", 0.4)
-            ma15 = get_ma15("KRW-DOGE")
-            current_price = get_current_price("KRW-DOGE")
+            target_price = get_target_price("KRW-QTUM", 0.4)
+            ma15 = get_ma15("KRW-QTUM")
+            current_price = get_current_price("KRW-QTUM")
             if target_price < current_price and ma15 < current_price:
                 krw = get_balance("KRW")
                 if krw > 5000:
-                    buy_result = upbit.buy_market_order("KRW-DOGE", krw*0.9995)
-                    post_message(myToken,"#crypto", "DOGE buy : " +str(buy_result))
+                    buy_result = upbit.buy_market_order("KRW-QTUM", krw*0.9995)
+                    post_message(myToken,"#crypto", "QTUM buy : " +str(buy_result))
         else:
-            btc = get_balance("DOGE")
+            btc = get_balance("QTUM")
             if btc > 0.00008:
-                sell_result = upbit.sell_market_order("KRW-DOGE", btc*0.9995)
-                post_message(myToken,"#crypto", "DOGE buy : " +str(sell_result))
+                sell_result = upbit.sell_market_order("KRW-QTUM", btc*0.9995)
+                post_message(myToken,"#crypto", "QTUM buy : " +str(sell_result))
         time.sleep(1)
        
     except Exception as e:
