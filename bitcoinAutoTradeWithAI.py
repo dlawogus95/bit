@@ -81,12 +81,13 @@ while True:
         now = datetime.datetime.now()
         start_time = get_start_time("KRW-ADA")
         end_time = start_time + datetime.timedelta(days=1)
+        schedule.run_pending()
 
         if start_time < now < end_time - datetime.timedelta(seconds=10):
             target_price = get_target_price("KRW-ADA", 0.4)
             ma15 = get_ma15("KRW-ADA")
             current_price = get_current_price("KRW-ADA")
-            if target_price < current_price and ma15 < current_price:
+            if target_price < current_price and ma15 < predicted_close_price:
                 krw = get_balance("KRW")
                 if krw > 5000:
                     buy_result = upbit.buy_market_order("KRW-ADA", krw*0.9995)
